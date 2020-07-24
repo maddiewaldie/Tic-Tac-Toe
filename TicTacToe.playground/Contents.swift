@@ -6,8 +6,8 @@
 *  Version: 1.0
 */
 
-struct TicTacToe {
-    var board = [String]()
+class TicTacToe {
+    var board = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
     
     // Maddie - Display intro
     func displayIntro() -> Void {
@@ -17,7 +17,18 @@ struct TicTacToe {
     
     // Everyone - Board
     func displayBoard() -> Void {
+        print("----------------")
+        for i in 0...2 {
+            //print(i)
+            print("| ", terminator:"")
+            for j in 0...2 {
+                //print(j)
+                print(board[i][j], " | ", terminator:"")
+            }
+            print("\n----------------")
+        }
         
+        // Empty Board
     }
     
     // Lucinda - Set up players as x & o
@@ -65,6 +76,10 @@ struct TicTacToe {
     func displayScore() -> Void {
         
     }
-    
 
 }
+
+
+var tictactoe = TicTacToe()
+
+tictactoe.displayIntro()
