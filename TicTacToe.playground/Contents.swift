@@ -52,13 +52,20 @@ class TicTacToe {
         
     }
 
-    // Maddie - Keys - Letters / Numbers show what position
-    func updateBoard() -> Void{
-        print("Enter String 1")
+    // Maddie - Update board to indicate where player placed their X or O
+    func updateBoard(number: String, token: String) -> Void{
+        // Update board array
+        for i in 0...2 {
+            for j in 0...2 {
+                if number == board[i][j] {
+                    board[i][j] = token
+                }
+            }
+        }
         
-        let string = readLine(strippingNewline: true)!
-        
-        print(string)
+        // Display new board
+        print("\n")
+        displayBoard()
     }
 
     // Lucinda - Checking for wins / losses / ties
@@ -87,4 +94,3 @@ class TicTacToe {
 var tictactoe = TicTacToe()
 
 tictactoe.displayIntro()
-tictactoe.updateBoard()
