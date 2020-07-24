@@ -11,7 +11,7 @@ class TicTacToe {
     
     // Maddie - Display intro
     func displayIntro() -> Void {
-        print("Welcome to TicTacToe!")
+        print("Welcome to TicTacToe!\n")
         displayBoard()
     }
     
@@ -54,7 +54,11 @@ class TicTacToe {
 
     // Maddie - Keys - Letters / Numbers show what position
     func updateBoard() -> Void{
+        print("Enter String 1")
         
+        let string = readLine(strippingNewline: true)!
+        
+        print(string)
     }
 
     // Lucinda - Checking for wins / losses / ties
@@ -83,3 +87,4 @@ class TicTacToe {
 var tictactoe = TicTacToe()
 
 tictactoe.displayIntro()
+tictactoe.updateBoard()
