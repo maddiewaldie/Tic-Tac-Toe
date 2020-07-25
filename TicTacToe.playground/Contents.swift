@@ -39,7 +39,8 @@ class TicTacToe {
 
     // Sylvia - User Input
     func getUserInput() -> Void {
-        
+        print ("Enter a number corresponding to the board to make your move.")
+        //not done
     }
 
     // Sydney - Check validity of move
@@ -75,7 +76,8 @@ class TicTacToe {
     
     // Sylvia - Display game over / congrats message
     func displayGameOver() -> Void {
-        
+        print ("Game Over!")
+        playAgain()
     }
     
     // Sydney - Ask if players want to play again
