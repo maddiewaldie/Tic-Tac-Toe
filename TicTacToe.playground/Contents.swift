@@ -44,8 +44,13 @@ class TicTacToe {
     }
 
     // Sydney - Check validity of move
-    func checkValid() -> Bool {
-        return true // placeholder
+    func checkValid(move: Int) -> Bool {
+        //check move variable with numbers
+        /*if move != "X" || move != "O"{ //help, how should i check if an x or o is there?
+            return true
+        }else{
+            return false
+        }*/
     }
 
     // Maya - Switching from x to o (2 player)
@@ -82,7 +87,15 @@ class TicTacToe {
     
     // Sydney - Ask if players want to play again
     func playAgain() -> Bool {
-        return true // placeholder
+        print("Would you like to play again? 1 for yes 2 for no")
+        let answer = readLine()
+        if answer == 1{
+            return true
+        }else if answer == 2{
+            return false
+        }else{
+            return false
+        }
     }
     
     // Maya - Display score
