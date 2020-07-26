@@ -45,12 +45,18 @@ class TicTacToe {
 
     // Sylvia - User Input
     func getUserInput() -> Void {
-        
+        print ("Enter a number corresponding to the board to make your move.")
+        //not done
     }
 
     // Sydney - Check validity of move
-    func checkValid() -> Bool {
-        return true // placeholder
+    func checkValid(move: Int) -> Bool {
+        //check move variable with numbers
+        /*if move != "X" || move != "O"{ //help, how should i check if an x or o is there?
+            return true
+        }else{
+            return false
+        }*/
     }
 
     // Maya - Switching from x to o (2 player)
@@ -58,13 +64,20 @@ class TicTacToe {
         
     }
 
-    // Maddie - Keys - Letters / Numbers show what position
-    func updateBoard() -> Void{
-        print("Enter String 1")
+    // Maddie - Update board to indicate where player placed their X or O
+    func updateBoard(number: String, token: String) -> Void{
+        // Update board array
+        for i in 0...2 {
+            for j in 0...2 {
+                if number == board[i][j] {
+                    board[i][j] = token
+                }
+            }
+        }
 
-        let string = readLine(strippingNewline: true)!
-
-        print(string)
+        // Display new board
+        print("\n")
+        displayBoard()
     }
 
     // Lucinda - Checking for wins / losses / ties
@@ -74,12 +87,21 @@ class TicTacToe {
     
     // Sylvia - Display game over / congrats message
     func displayGameOver() -> Void {
-        
+        print ("Game Over!")
+        playAgain()
     }
     
     // Sydney - Ask if players want to play again
     func playAgain() -> Bool {
-        return true // placeholder
+        print("Would you like to play again? 1 for yes 2 for no")
+        let answer = readLine()
+        if answer == 1{
+            return true
+        }else if answer == 2{
+            return false
+        }else{
+            return false
+        }
     }
     
     // Maya - Display score
