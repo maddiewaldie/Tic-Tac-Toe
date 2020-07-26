@@ -8,7 +8,19 @@
 
 class TicTacToe {
     var board = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
-    
+
+    //this block creates and initializes a subclass so that the players have the attributes name and mark
+    class player:TicTacToe {
+        var name:String;
+        var mark:String;
+
+        init(name:String, mark:String) {
+            self.name = name;
+            self.mark = mark;
+        }
+    }
+
+
     // Maddie - Display intro
     func displayIntro() -> Void {
         print("Welcome to TicTacToe!\n")
@@ -30,12 +42,6 @@ class TicTacToe {
         
         // Empty Board
     }
-    
-    // Lucinda - Set up players as x & o
-    func setUpPlayers(name: String) -> Void {
-        // enter name
-        
-    }
 
     // Sylvia - User Input
     func getUserInput() -> Void {
@@ -55,9 +61,9 @@ class TicTacToe {
     // Maddie - Keys - Letters / Numbers show what position
     func updateBoard() -> Void{
         print("Enter String 1")
-        
+
         let string = readLine(strippingNewline: true)!
-        
+
         print(string)
     }
 
@@ -84,7 +90,25 @@ class TicTacToe {
 }
 
 
+//----------------------------------------------
+//EXECUTABLE CODE
+//----------------------------------------------
+
+
+//creates an instance of the game TicTacToe
 var tictactoe = TicTacToe()
 
+//players input their name which is stored in the temporary variables p1name and p2name
+print("Enter Player 1 name: ")
+let p1name = readLine()!
+print("Enter Player 2 name: ")
+let p2name = readLine()!
+
+//creates two player objects, with the properties that were just inputted
+var player1 = TicTacToe.player(name:p1name, mark:"X")
+var player2 = TicTacToe.player(name:p2name, mark:"Y")
+
 tictactoe.displayIntro()
-tictactoe.updateBoard()
+print("Player 1, \(player1.name) has mark \(player1.mark)")
+print("Player 2, \(player2.name) has mark \(player2.mark)")
+//tictactoe.updateBoard()
