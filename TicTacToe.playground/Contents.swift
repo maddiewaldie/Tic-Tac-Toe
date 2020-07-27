@@ -53,15 +53,13 @@ class TicTacToe {
     }
 
     // Sydney - Check validity of move
-    func checkValid(move: Int) -> Bool {
+    func checkValid(move: Int, moveString: String /*enter the move as a string too because i cant figure out another way to check the board if you do let me know!*/) -> Bool {
         if move > 0 && move < 10 {
             return true
-        }else{
-            return false
         }
         for i in 0 ... 2{
             for j in 0 ... 2{
-                if board[i][j] == move{
+                if board[i][j] == moveString{
                     return false
                 }
             }
