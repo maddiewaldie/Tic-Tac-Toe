@@ -22,6 +22,11 @@ class TicTacToe {
         self.player1=player1
         self.player2=player2
     }
+    
+    //make array with players and their wins
+    var scores:[Int] = [0,0]    //scores[0] is player1, scores[1] is palyer 2
+    
+    var activeMark = "X"
 
     // Maddie - Display intro
     func displayIntro() -> Void {
@@ -72,23 +77,15 @@ class TicTacToe {
         return false
     }
 
-    // Maya - Switching from x to o (2 player)
+    // Maya - Switches activeMark variable to opposite letter (x -> o or o -> x) (2 player)
     //This function will happen at the end of every players turn so that the next player will place the opposite symbol
-    //idea:
-        //message that player1 should move
-        //user will input number to correspond with position, x will be placed
-        //*the function will switch so that o will be placed next move*
-        //player2 imputs number
-        //*the function will switch so that x will be placed next move*
     func switchPlayer() -> Void {
-        var XorO = "X"
-        if XorO == "X"{
-           XorO = "O"
+        if activeMark == "X"{
+           activeMark = "O"
         }
-        else if XorO == "O"{
-            XorO = "X"
+        else if activeMark == "O"{
+            activeMark = "X"
         }
-        
     }
 
     // Maddie - Update board to indicate where player placed their X or O
@@ -222,21 +219,19 @@ class TicTacToe {
         return false
     }
     
-    //make array with players and their wins
-    var scores = [[tictactoe.player1, 0],[tictactoe.player2, 0]]
-    
     // Maya - Display score
     func displayScore() -> Void {
         //print statement giving wins for each player
-        print("The score is \(scores[0][1]) wins for \(tictactoe.player1) and \(scores[1][1]) wins for \(tictactoe.player2)")
+        print("The score is \(scores[0][1]) wins for \(player1) and \(scores[1][1]) wins for \(player2)")
     }
     
-    func addWinToScores(player: String) -> Void{
-        if player == "1"{
-            scores[0][1] = 1
+    //insert which player and 1 win will be added to their score in the scores array
+    func addWinToScores(player: Int) -> Void{
+        if player == 1{
+            scores[0] += 1
         }
-        else if player == "2"{
-            scores[1][1] += 1
+        else if player == 2{
+            scores[1] += 1
         }
     }
     
