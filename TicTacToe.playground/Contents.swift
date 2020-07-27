@@ -198,9 +198,22 @@ class TicTacToe {
         }
     }
     
+    //make array with players and their wins
+    var scores = [[tictactoe.player1, 0],[tictactoe.player2, 0]]
+    
     // Maya - Display score
     func displayScore() -> Void {
-        
+        //print statement giving wins for each player
+        print("The score is \(scores[0][1]) wins for \(tictactoe.player1) and \(scores[1][1]) wins for \(tictactoe.player2)")
+    }
+    
+    func addWinToScores(player: String) -> Void{
+        if player == "1"{
+            scores[0][1] += 1
+        }
+        else if player == "2"{
+            scores[1][1] += 1
+        }
     }
 
 }
