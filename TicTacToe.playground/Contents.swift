@@ -26,7 +26,8 @@ class TicTacToe {
     // Maddie - Display intro
     func displayIntro() -> Void {
         print("Welcome to TicTacToe!\n")
-        displayBoard()
+        print("Use the board below as a reference for where to place your tokens when playing.")
+        displayBoard(board:board)
     }
     
     // Everyone - Board
@@ -81,14 +82,14 @@ class TicTacToe {
         // Update board array
         for i in 0...2 {
             for j in 0...2 {
-                if number == board[i][j] {
-                    board[i][j] = token
+                if number == playingBoard[i][j] {
+                    playingBoard[i][j] = token
                 }
             }
         }
         // Display new board
         print("\n")
-        displayBoard()
+        displayBoard(board: playingBoard)
     }
 
 
@@ -209,7 +210,7 @@ class TicTacToe {
     
     func addWinToScores(player: String) -> Void{
         if player == "1"{
-            scores[0][1] += 1
+            scores[0][1] = 1
         }
         else if player == "2"{
             scores[1][1] += 1
