@@ -25,8 +25,13 @@ class TicTacToe {
 
     // Maddie - Display intro
     func displayIntro() -> Void {
+        // Messages
         print("Welcome to TicTacToe!\n")
+        print("Player 1, \(player1) has mark X.\n")
+        print("Player 2, \(player2) has mark O.\n")
         print("Use the board below as a reference for where to place your tokens when playing.")
+        
+        // Reference board
         displayBoard(board:board)
     }
     
@@ -101,6 +106,9 @@ class TicTacToe {
         // Display new board
         print("\n")
         displayBoard(board: playingBoard)
+        
+        // Check if it;s a win/loss/tie
+        checkWinLossTie(location: number, activeMark: token)
     }
 
 
@@ -255,10 +263,10 @@ let p2name = readLine()!
 //creates an instance of the game TicTacToe with both players' names
 var tictactoe = TicTacToe(player1:p1name, player2:p2name)
 
+// displays intro message
 tictactoe.displayIntro()
-print("Player 1, \(tictactoe.player1) has mark X")
-print("Player 2, \(tictactoe.player2) has mark O")
 
+// main code
 while !tictactoe.isGameOver() {
     tictactoe.getUserInput()
 }
