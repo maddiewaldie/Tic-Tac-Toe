@@ -7,13 +7,16 @@
 */
 
 class TicTacToe {
+    // "empty" board used as a reference for different functions. should remain constant throughout ("let" keyword enforces this)
     var board = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
-
-    var player1:String
-    var player2:String
+    // playingBoard is the "editable" board that changes with user input, necessary for checkWinLossTie() to work.
+    var playingBoard = [["X", "X", "X"], ["4", "X", "6"], ["7", "X", "9"]]
 
     //this variable can be used to check across functions to see if the game has ended (changed in checkWinLossTie())
     var gameOver = false
+
+    var player1:String
+    var player2:String
 
     init(player1:String, player2:String) {
         self.player1=player1
@@ -23,11 +26,11 @@ class TicTacToe {
     // Maddie - Display intro
     func displayIntro() -> Void {
         print("Welcome to TicTacToe!\n")
-        displayBoard()
+        displayBoard(board:board)
     }
     
     // Everyone - Board
-    func displayBoard() -> Void {
+    func displayBoard(board:[[String]]) -> Void {
         print("----------------")
         for i in 0...2 {
             //print(i)
@@ -74,34 +77,99 @@ class TicTacToe {
                 }
             }
         }
-//        checkWinLossTie(number:location, token:activeMark)
         // Display new board
         print("\n")
-        displayBoard()
+        displayBoard(board:board)
     }
 
-    // Lucinda - Checking for wins / losses / ties
-//    func checkWinLossTie(location:String, activeMark:String) -> Void {
-//        var activePlayer = String {
-//            if(activeMark=="X") {
-//                return player1
-//            }
-//            return player2
-//        }
-//
-//        if(checkForHorizontalWin()||checkForVerticalWin()||checkForDiagonalWin()) {
-//            print("\(activePlayer) has won as mark \(activeMark)!")
-//            gameOver = true;
-//        } else if (boardIsFull()) {
-//            print("This game is a tie!")
-//        }
-//
-//        //TODO: make functions checkForHorizontalWin(), checkForVerticalWin(), checkForDiagonalWin(), and boardIsFull()
-//        //above all have return type Bool
-//
-//    }
 
-    
+    // Lucinda - Checking for wins / losses / ties
+    func checkWinLossTie(location:String, activeMark:String) -> Void {
+        var activePlayer:String;
+        // assigns the variable activePlayer based on the activeMark (used in output of win message)
+        if(activeMark=="X") {
+            activePlayer = player1
+        } else {
+            activePlayer = player2
+        }
+
+        if(horizontalWin(location:location)||verticalWin(location:location)||diagonalWin(location:location)) {
+            print("\(activePlayer) has won as mark \(activeMark)!")
+            displayBoard(board:playingBoard)
+            gameOver = true;
+        } else if (boardIsFull()) {
+            print("This game is a tie!")
+        }
+
+    }
+    // checks if there is horizontal row with all matching characters from reference point "location" (number the user entered)
+    func horizontalWin(location:String) -> Bool {
+        // finds the row and column of the user's most current marking location, only the row (for horizontal) will be used
+        let (row,col) = getIndex(location:location)
+        // checks if each of the 3 spaces in that row are the same mark
+        if(these3AreTheSame(one:playingBoard[row][0], two:playingBoard[row][1], three:playingBoard[row][2])) {
+            return true
+        }
+        return false
+    }
+    // checks if there is vertical column with all matching characters from reference point "location" (number the user entered)
+    func verticalWin(location:String) -> Bool {
+        // finds the row and column of the user's most current marking location, only the col (for vertical) will be used
+        let (row,col) = getIndex(location:location)
+        // checks if each of the 3 spaces in that column are the same mark
+        if(these3AreTheSame(one:playingBoard[0][col], two:playingBoard[1][col], three:playingBoard[2][col])) {
+            return true
+        }
+        return false
+    }
+
+    func diagonalWin(location:String) -> Bool {
+        // checks if the diagonal 3 from the top left to the bottom right are the same mark
+        let leftRightWin = these3AreTheSame(one:playingBoard[0][0],two:playingBoard[1][1],three:playingBoard[2][2])
+        // checks if the diagonal 3 from the top right to the bottom left are the same mark
+        let rightLeftWin = these3AreTheSame(one:playingBoard[0][2],two:playingBoard[1][1],three:playingBoard[2][0])
+
+        if(leftRightWin || rightLeftWin) {
+            return true
+        }
+        return false
+    }
+
+    func getIndex(location:String) -> (Int,Int) {
+        var row = 0
+        var col = 0
+        for i in 0...2 {
+            for j in 0...2 {
+                if(board[i][j] == location) {
+                    row = i
+                    col = j
+                }
+            }
+        }
+        return (row,col)
+    }
+
+    func these3AreTheSame(one:String, two:String, three:String) -> Bool{
+        if(one == two && two == three) {
+            return true
+        }
+        return false
+    }
+
+    func boardIsFull() -> Bool{
+        for i in 0...2 {
+            for j in 0...2 {
+                // if this playingBoard cell is neither X nor O, then the board is not full, so false is returned
+                if (playingBoard[i][j] != "X" && playingBoard[i][j] != "O") {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+
+
+
     // Sylvia - Display game over / congrats message
     func displayGameOver() -> Void {
         print ("Game Over!")
@@ -146,4 +214,4 @@ var tictactoe = TicTacToe(player1:p1name, player2:p2name)
 tictactoe.displayIntro()
 print("Player 1, \(tictactoe.player1) has mark X")
 print("Player 2, \(tictactoe.player2) has mark O")
-//tictactoe.updateBoard()
+tictactoe.checkWinLossTie(location: "2", activeMark:"X")
