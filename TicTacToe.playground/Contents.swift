@@ -54,7 +54,18 @@ class TicTacToe {
 
     // Sydney - Check validity of move
     func checkValid(move: Int) -> Bool {
-        //not sure how we are displaying the board or changing it
+        if move > 0 && move < 10 {
+            return true
+        }else{
+            return false
+        }
+        for i in 0 ... 2{
+            for j in 0 ... 2{
+                if board[i][j] == move{
+                    return false
+                }
+            }
+        }
         return false
     }
 
@@ -188,15 +199,21 @@ class TicTacToe {
     
     // Sydney - Ask if players want to play again
     func playAgain() -> Bool {
+        displayScore()
         print("Would you like to play again? 1 for yes 2 for no")
         let answer = readLine()
         if answer == "1"{
+            for i in 0 ... 2{
+                for j in 0 ... 2{
+                    playingBoard[i][j] = " " //empties playing board
+                }
+            }
             return true
         }else if answer == "2"{
-            return false
-        }else{
+            gameOver = true
             return false
         }
+        return false
     }
     
     //make array with players and their wins
@@ -215,6 +232,10 @@ class TicTacToe {
         else if player == "2"{
             scores[1][1] += 1
         }
+    }
+    
+    func isGameOver() -> Bool {
+        return gameOver
     }
 
 }
@@ -237,4 +258,9 @@ var tictactoe = TicTacToe(player1:p1name, player2:p2name)
 tictactoe.displayIntro()
 print("Player 1, \(tictactoe.player1) has mark X")
 print("Player 2, \(tictactoe.player2) has mark O")
-tictactoe.checkWinLossTie(location: "2", activeMark:"X")
+
+while !tictactoe.isGameOver() {
+    tictactoe.getUserInput()
+}
+
+
