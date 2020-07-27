@@ -58,8 +58,22 @@ class TicTacToe {
     }
 
     // Maya - Switching from x to o (2 player)
+    //This function will happen at the end of every players turn so that the next player will place the opposite symbol
+    //idea:
+        //message that player1 should move
+        //user will input number to correspond with position, x will be placed
+        //*the function will switch so that o will be placed next move*
+        //player2 imputs number
+        //*the function will switch so that x will be placed next move*
     func switchPlayer() -> Void {
-
+        var XorO = "X"
+        if XorO == "X"{
+           XorO = "O"
+        }
+        else if XorO == "O"{
+            XorO = "X"
+        }
+        
     }
 
     // Maddie - Update board to indicate where player placed their X or O
