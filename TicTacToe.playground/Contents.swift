@@ -26,7 +26,7 @@ class TicTacToe {
     // Maddie - Display intro
     func displayIntro() -> Void {
         print("Welcome to TicTacToe!\n")
-        displayBoard(board:board)
+        displayBoard()
     }
     
     // Everyone - Board
@@ -53,12 +53,7 @@ class TicTacToe {
 
     // Sydney - Check validity of move
     func checkValid(move: Int) -> Bool {
-        //check move variable with numbers
-        /*if move != "X" || move != "O"{ //help, how should i check if an x or o is there?
-            return true
-        }else{
-            return false
-        }*/
+        //not sure how we are displaying the board or changing it
         return false
     }
 
@@ -79,7 +74,7 @@ class TicTacToe {
         }
         // Display new board
         print("\n")
-        displayBoard(board:board)
+        displayBoard()
     }
 
 
