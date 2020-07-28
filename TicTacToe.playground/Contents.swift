@@ -6,13 +6,16 @@
 *  Version: 1.0
 */
 
+import Foundation
+
 class TicTacToe {
     // "empty" board used as a reference for different functions. should remain constant throughout ("let" keyword enforces this)
     var board = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
+    
     // playingBoard is the "editable" board that changes with user input, necessary for checkWinLossTie() to work.
     var playingBoard = [["X", "X", "X"], ["4", "X", "6"], ["7", "X", "9"]]
 
-    //this variable can be used to check across functions to see if the game has ended (changed in checkWinLossTie())
+    // this variable can be used to check across functions to see if the game has ended (changed in checkWinLossTie())
     var gameOver = false
 
     var player1:String
@@ -32,12 +35,27 @@ class TicTacToe {
     func displayIntro() -> Void {
         // Messages
         print("Welcome to TicTacToe!\n")
+        
+        // Delay for X seconds before showing player information
+        delay(seconds: 1.0)
+        
         print("Player 1, \(player1) has mark X.\n")
         print("Player 2, \(player2) has mark O.\n")
-        print("Use the board below as a reference for where to place your tokens when playing.")
+        
+        // Delay for X seconds before showing reference board.
+        delay(seconds: 1.0)
+        
+        print("Use the board below as a reference for where to place your tokens when playing.\n")
         
         // Reference board
         displayBoard(board:board)
+        
+        // Delay for X seconds before starting the game.
+        delay(seconds: 1.0)
+    }
+    
+    func delay(seconds: Double) -> Void {
+        sleep(UInt32(2.0))
     }
     
     // Everyone - Board
@@ -222,7 +240,7 @@ class TicTacToe {
     // Maya - Display score
     func displayScore() -> Void {
         //print statement giving wins for each player
-        print("The score is \(scores[0][1]) wins for \(player1) and \(scores[1][1]) wins for \(player2)")
+        print("The score is \(scores[0]) wins for \(player1) and \(scores[1]) wins for \(player2)")
     }
     
     //insert which player and 1 win will be added to their score in the scores array
