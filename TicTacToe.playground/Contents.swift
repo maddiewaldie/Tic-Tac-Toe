@@ -13,8 +13,9 @@ class TicTacToe {
     var board = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
     
     // playingBoard is the "editable" board that changes with user input, necessary for checkWinLossTie() to work.
-    var playingBoard = [["X", "X", "X"], ["4", "X", "6"], ["7", "X", "9"]]
-
+    //var playingBoard = [["X", "X", "X"], ["4", "X", "6"], ["7", "X", "9"]]
+    var playingBoard = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
+    
     // this variable can be used to check across functions to see if the game has ended (changed in checkWinLossTie())
     var gameOver = false
 
@@ -76,8 +77,25 @@ class TicTacToe {
 
     // Sylvia - User Input
     func getUserInput() -> Void {
-        print ("Enter a number corresponding to the board to make your move.")
-        //not done
+        
+        print ("\(getActivePlayer()), enter a number corresponding to the board to make your move.")
+        let location = readLine()!
+        let locInt = Int(location)!
+        if (checkValid(move: locInt, moveString: location)) {
+            updateBoard(number: location, token: activeMark)
+        }
+        else {
+            print("Not a valid input. Try again")
+        }
+    }
+    
+    func getActivePlayer() -> String {
+        if activeMark == "X" {
+            return player1
+        }
+        else {
+            return player2
+        }
     }
 
     // Sydney - Check validity of move
@@ -122,6 +140,9 @@ class TicTacToe {
         
         // Check if it;s a win/loss/tie
         checkWinLossTie(location: number, activeMark: token)
+        
+        // Switch player
+        switchPlayer()
     }
 
 
@@ -138,9 +159,14 @@ class TicTacToe {
         if(horizontalWin(location:location)||verticalWin(location:location)||diagonalWin(location:location)) {
             print("\(activePlayer) has won as mark \(activeMark)!")
             displayBoard(board:playingBoard)
-            gameOver = true;
+            addWinToScores(player: getActivePlayer())
+            gameOver = true
         } else if (boardIsFull()) {
             print("This game is a tie!")
+            gameOver = true
+        }
+        if gameOver {
+            playAgain()
         }
 
     }
@@ -224,11 +250,15 @@ class TicTacToe {
         print("Would you like to play again? 1 for yes 2 for no")
         let answer = readLine()
         if answer == "1"{
+            var count = 1
             for i in 0 ... 2{
                 for j in 0 ... 2{
-                    playingBoard[i][j] = " " //empties playing board
+                    playingBoard[i][j] = String(count) //empties playing board
+                    count += 1
                 }
             }
+            displayBoard(board: board)
+            gameOver = false
             return true
         }else if answer == "2"{
             gameOver = true
@@ -244,11 +274,11 @@ class TicTacToe {
     }
     
     //insert which player and 1 win will be added to their score in the scores array
-    func addWinToScores(player: Int) -> Void{
-        if player == 1{
+    func addWinToScores(player: String) -> Void{
+        if player == player1{
             scores[0] += 1
         }
-        else if player == 2{
+        else if player == player2{
             scores[1] += 1
         }
     }
