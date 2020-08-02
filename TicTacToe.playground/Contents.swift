@@ -262,6 +262,7 @@ class TicTacToe {
             return true
         }else if answer == "2"{
             gameOver = true
+            displayGameOver()
             return false
         }
         return false
