@@ -80,8 +80,8 @@ class TicTacToe {
         
         print ("\(getActivePlayer()), enter a number corresponding to the board to make your move.")
         let location = readLine()!
-        let locInt = Int(location)!
-        if (checkValid(move: locInt, moveString: location)) {
+//        let locInt = Int(location)!
+        if (checkValid(location: location)) {
             updateBoard(number: location, token: activeMark)
         }
         else {
@@ -99,14 +99,17 @@ class TicTacToe {
     }
 
     // Sydney - Check validity of move
-    func checkValid(move: Int, moveString: String /*enter the move as a string too because i cant figure out another way to check the board if you do let me know!*/) -> Bool {
-        if move > 0 && move < 10 {
-            return true
-        }
-        for i in 0 ... 2{
-            for j in 0 ... 2{
-                if board[i][j] == moveString{
-                    return false
+    func checkValid(location: String /*enter the move as a string too because i cant figure out another way to check the board if you do let me know!*/) -> Bool {
+        let isAnInt = (Int(location) != nil)
+        if(isAnInt) {
+            let intLoc = Int(location)!
+            if(intLoc > 0 && intLoc < 10) {
+                for i in 0 ... 2{
+                    for j in 0 ... 2{
+                        if playingBoard[i][j] == location {
+                            return true
+                        }
+                    }
                 }
             }
         }
@@ -173,7 +176,16 @@ class TicTacToe {
     // checks if there is horizontal row with all matching characters from reference point "location" (number the user entered)
     func horizontalWin(location:String) -> Bool {
         // finds the row and column of the user's most current marking location, only the row (for horizontal) will be used
-        let (row,col) = getIndex(location:location)
+//        let (row,col) = getIndex(location:location)
+        var row = 0
+        for i in 0...2 {
+            for j in 0...2 {
+                if(board[i][j] == location) {
+                    row = i
+//                    col = j
+                }
+            }
+        }
         // checks if each of the 3 spaces in that row are the same mark
         if(these3AreTheSame(one:playingBoard[row][0], two:playingBoard[row][1], three:playingBoard[row][2])) {
             return true
@@ -183,7 +195,15 @@ class TicTacToe {
     // checks if there is vertical column with all matching characters from reference point "location" (number the user entered)
     func verticalWin(location:String) -> Bool {
         // finds the row and column of the user's most current marking location, only the col (for vertical) will be used
-        let (row,col) = getIndex(location:location)
+//        let (row,col) = getIndex(location:location)
+        var col = 0
+        for i in 0...2 {
+            for j in 0...2 {
+                if(board[i][j] == location) {
+                    col = j
+                }
+            }
+        }
         // checks if each of the 3 spaces in that column are the same mark
         if(these3AreTheSame(one:playingBoard[0][col], two:playingBoard[1][col], three:playingBoard[2][col])) {
             return true
@@ -240,16 +260,15 @@ class TicTacToe {
 
     // Sylvia - Display game over / congrats message
     func displayGameOver() -> Void {
-        print ("Game Over!")
-//        playAgain()
+        print ("Game Over! Please play again!")
     }
     
     // Sydney - Ask if players want to play again
-    func playAgain() -> Bool {
+    func playAgain() -> Void{
         displayScore()
-        print("Would you like to play again? 1 for yes 2 for no")
-        let answer = readLine()
-        if answer == "1"{
+        print("Would you like to play again? 'Y' for yes 'n' for no")
+        let answer = readLine()!
+        if answer.uppercased() == "Y" {
             var count = 1
             for i in 0 ... 2{
                 for j in 0 ... 2{
@@ -259,13 +278,13 @@ class TicTacToe {
             }
             displayBoard(board: board)
             gameOver = false
-            return true
-        }else if answer == "2"{
-            gameOver = true
+        } else if answer.uppercased() == "N" {
             displayGameOver()
-            return false
+            gameOver = true
+        } else {
+            print("Not a valid input, try again.")
+            playAgain()
         }
-        return false
     }
     
     // Maya - Display score
